@@ -1,0 +1,470 @@
+// this version of firebase rules from tutorial DOES NOT WORK : blocks logged in user from creating discussion  
+match /{document=**} {
+  allow read: if
+    true
+}
+
+function userIsLoggedIn(){
+  return request.auth != null
+}
+function isNewResource(){
+  return resource == null
+}
+function resourceBelongsToUser(){
+  return request.auth.uid == resource.data.userId
+}
+
+// discussions
+match /discussions/{discussion}{
+  allow write: if
+    userIsLoggedIn() && (isNewResource() || resourceBelongsToUser())
+}
+
+// scoops 
+match /scoops/{scoop}{
+  allow write: if
+      userIsLoggedIn() && (isNewResource() || resourceBelongsToUser())
+}
+
+// users
+match /users/{user}{
+  allow create: if
+    true
+  allow update: if
+    request.auth.uid == resource.id
+}
+}
+}
+
+// end of firebase rules
+
+
+// from register form:
+
+<template>
+    <div class="register">
+        <h1>Create an account</h1>
+        <VeeForm @submit="register">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <VeeField name="name" label='Name' v-model="form.name" type="text" class="form-input" rules="required"/>
+                <VeeErrorMessage name="name" class="form-error" />
+            </div>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <VeeField name="username" label='Username' v-model="form.username" type="text" rules="required|unique"/>
+                <VeeErrorMessage name="username" class="form-error" />
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <VeeField name="email" label='Email' v-model="form.email" type="text" class="form-input" rules="required|email"/>
+                <VeeErrorMessage name="email" class="form-error" />
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <VeeField name="password" label='Password' v-model="form.password" type="text" class="form-input" rules="required|min:8"/>
+                <VeeErrorMessage name="password" class="form-error" />
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="register">Register</button>
+            </div>
+        </VeeForm>
+    </div>
+</template>
+
+
+// from Login form:
+
+<form @submit.prevent="signIn" class="signin-form">
+<h1>Login</h1>
+<div class="form-group">
+    <label for="email">Email:</label>
+    <input type="text" v-model="form.email">
+</div>
+<div class="form-group">
+    <label for="password">Password:</label>
+    <input type="text" v-model="form.password">
+</div>
+<div class="form-actions">
+    <button type="submit" class="register">Log in</button>
+</div>
+<div class="to-register">
+  <router-link :to="{name: 'Register'}">Create an account?</router-link>
+</div>
+</form>
+
+
+
+
+
+// other
+from navbar:
+
+<router-link :to="{name:'Profile'}">
+<span v-if="authUser" class="profile-icon">
+{{authUser.username}}</span>
+</router-link>
+
+
+
+
+----
+
+
+fetchFeeds: ({ commit }) => new Promise((resolve) => {
+  firebase.firestore().collection('feeds').onSnapshot((querySnapshot) => {
+      const feeds = querySnapshot.docs.map(doc => {
+          const item = { id: doc.id, ...doc.data() }
+          commit('setItem', { resource: 'feeds', item })
+          return item
+      })
+      resolve(feeds)
+      console.log('Action >> fetchFeeds: ', feeds)
+  })   
+  }),
+
+
+
+
+
+
+
+
+
+<template>
+  <div class="newDiscussion">
+      <form @submit.prevent="addWord">
+          <br>
+          <label for="word">Add a new word:</label><br>
+          <input type="text" v-model="word">
+          <br><br>
+          <label for="definitions">Add any pertinent definitions:</label><br>
+          <input type="text" v-model="definition1"><br>
+          <input type="text" v-model="definition2"><br>
+          <input type="text" v-model="definition3"><br><br>
+          <label for="questions">Add any pertinent questions:</label><br>
+          <input type="text" v-model="question1"><br>
+          <input type="text" v-model="question2"><br><br>
+          <button>Add Word</button>
+      </form>
+  </div>
+</template>
+
+<script>
+export default {
+  data () {
+    return {
+      word: "",
+      definition1: "",
+      definition2: "",
+      definiton3: "",
+      question1: "",
+      question2: ""
+    }
+  },
+  methods: {
+    addWord () {
+      const definitions = []
+      const questions = []
+      if(this.definition1){
+        definitions.push(this.definition1)
+      }
+      if(this.definition2){
+        definitions.push(this.definition2)
+      }
+      if(this.definition3){
+        definitions.push(this.definition3)
+      }
+      if(this.question1){
+        questions.push(this.question1)
+      }
+      if(this.question2){
+        questions.push(this.question2)
+      }
+      const discussion = {
+        word: this.word,
+        definitions,
+        questions
+      }
+      this.$store.dispatch('createDiscussion', { word: discussion.word, definitions: discussion.definitions, questions: discussion.questions} )
+      this.word = ""
+      this.$router.push('/')
+    }
+  }
+}
+</script>
+
+<style>
+
+</style>
+       
+       
+       
+       
+       
+       
+       
+       
+       <!-- <p>form (data):</p>
+         {{ form }}
+         <p>Discussion (computed):</p>
+         {{ discussion }}
+       <p>getting discussion from props:</p>
+       {{ form.word }}
+       {{ form.discussion }} -->
+       <p>discussion from data from prop:</p>
+   {{ updatingDiscussion }}
+
+     <form @submit.prevent="EditWord">
+         <br>
+
+         <!-- <label for="word">Edit word:</label><br>
+         <input type="text" v-model="form.discussion">
+         <br><br>
+         <label for="definitions">Pertinent definitions:</label><br>
+         <div v-if="form.definition1.length">
+           <input type="text" v-model="form.definition1">
+         </div>
+         <div v-if="form.definition2.length">
+           <input type="text" v-model="form.definition2">
+         </div>
+         <div v-if="form.definition3.length">
+           <input type="text" v-model="form.definition3">
+         </div>
+           <label for="questions">Pertinent Questions:</label><br>
+         <div v-if="form.question1.length">
+           <input type="text" v-model="form.question1">
+         </div>
+         <div v-if="form.question2.length">
+           <input type="text" v-model="form.question2">
+         </div>
+         <button>Save Changes</button> -->
+     </form>
+ </div>
+ 
+</template>
+
+<script>
+// import { findById } from '@/helpers'
+
+
+export default {
+   props: {
+       id : {
+           required: true,
+           type: String
+       },
+       discussion : {
+           required: true,
+           type: Object
+       }
+   },
+   data () {
+       return {
+           updatingDiscussion: { ...this.discussion},
+           // editingDiscussion: { ...this.discussion},
+           // word: this.discussion.word,
+           // form: {
+           //     word: 'word',
+           //     discussion: this.discussion
+           //     word: this.discussion.word,
+           //     definition1: this.discussion.definitions[0],
+           //     definition2:this.discussion.definitions[1],
+           //     definition3:this.discussion.definitions[2],
+           //     question1:this.discussion.questions[0],
+           //     question2:this.discussion.questions[1]
+           // }
+       }
+   },
+   async created () {
+       // fetch the discussion
+       const discussion = await this.$store.dispatch('fetchDiscussion', { id: this.id })
+       console.log('discussion from discussionEdit: ', discussion)
+   },
+   mounted () {
+       console.log('discussion on data from mounted:', this.discussion)
+   },
+   // computed: {
+   //     discussions () {
+   //         return this.$store.state.discussions
+   //     },
+   //     discussion () {
+   //         return findById(this.discussions, this.id)
+   //     }
+   // },
+   methods: {
+       EditWord () {
+           console.log('sending newDiscussion: ', {...this.form})
+           this.$store.dispatch('editDiscussion', {...this.form } )
+           this.word = ""
+           this.$router.push('/')
+       }
+   }
+}
+
+
+
+
+
+
+
+
+
+
+// Posting discussion as was working before moving to store:<template>
+  
+
+    // await fetch('http://localhost:3000/discussions', { 
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json'},
+    //     body: JSON.stringify(newDiscussion)
+    //   })
+    // get id generated on new added word by getting all discussions
+    // await fetch('http://localhost:3000/discussions') 
+    // .then(res => res.json()) 
+    // .then(data => this.discussions = data)
+    // .catch(err => console.log(err))
+    // // find new added word
+    // const discussion = this.discussions.find(discussion => discussion.word === this.word)
+    // // add new word id for the feed
+    // const newFeed = {
+    //   discussion : {
+    //     word: this.word,
+    //     timestamp: discussion.timestamp,
+    //     id: discussion.id
+    //   },
+    //   timestamp:Date.now()
+    // }
+    // Post the new word in feeds
+//     fetch('http://localhost:3000/feeds', { 
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json'},
+//         body: JSON.stringify(newFeed)
+//     }).then(() => {
+//         this.word = "",
+//         this.discussions = []
+//     }).then(() => {
+//         this.$router.push('/')
+//     })
+//     .catch((err) => console.log(err))
+// </template>
+
+
+
+// ----------------
+// Previous
+// this is working
+
+// <template>
+//   <div class="newDiscussion">
+//       <form @submit.prevent="addWord">
+//           <label for="word">Add a new word</label>
+//           <input type="text" v-model="word">
+//           <button>Add Word</button>
+//       </form>
+//   </div>
+// </template>
+
+
+
+
+// <script>
+// export default {
+//   data () {
+//     return {
+//       word: ""
+//     }
+//   },
+//   methods: {
+//     addWord () {
+//       let newDiscussion = {
+//         word: this.word,
+//         timestamp: Date.now(),
+//         date: Date()
+//       }
+
+      // let newFeed = {
+      //   word = this.word,
+      //   timestamp: Date.now(),
+      // }
+
+  //   fetch('http://localhost:3000/discussions', { 
+  //       method: 'POST',
+  //       headers: { 'Content-Type': 'application/json'},
+  //       body: JSON.stringify(newDiscussion)
+  //     }).then(() => {
+  //         this.word = ""
+  //     }).then(() => {
+  //         this.$router.push('/')
+  //     })
+  //     .catch((err) => console.log(err))
+  //   }
+  // }
+
+
+      //   const newFeed = {
+      //   discussion: {
+      //     word: this.word,
+      //     id: 
+      //   },
+      //   timestamp: Date.now()
+      // }
+
+      // fetch('http://localhost:3000/feeds', { 
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json'},
+      //   body: JSON.stringify(newFeed)
+      // }).then(() => {
+      //     this.word = ""
+      // }).then(() => {
+      //     this.$router.push('/')
+      // })
+      // .catch((err) => console.log(err))
+
+
+      // fetch all scoops including new one with auto-generated id
+      await fetch('http://localhost:3000/scoops')
+      .then(res => res.json()) 
+      .then(data => this.scoops = data)
+      .catch(err => console.log(err))
+
+      // get newScoop which now includes the auto-generated id
+      const scoop = this.scoops.find(scoop => scoop.text === this.text)
+
+      // fetch the feeds to isolate the one to modify
+      await fetch('http://localhost:3000/feeds') 
+      .then(res => res.json()) 
+      .then(data => this.feeds = data)  
+      .catch(err => console.log(err))
+
+      // get feed id to modify
+
+      const feedId = this.feeds.find(feed => feed.discussion.id === this.id).id
+      
+      // the uri to patch:
+      const uri = 'http://localhost:3000/feeds/' + feedId
+
+      // the feed to be modified w/ new data:
+      const newFeed = {
+        latestScoop : {
+          text: this.text,
+          id: scoop.id
+        },
+        timestamp: Date.now(),
+      }
+      
+      fetch(uri, { 
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify(newFeed)
+      }).then(()=> {
+        console.log('the uri: ', uri)
+        console.log('feedId: ', feedId)
+        console.log('the scoop: ', scoop)
+      }).then(() => {
+        this.text = "",
+        this.discussions = [],
+        this.scoops = []
+      }).then(() => {
+        this.$router.push('/')
+      }).catch((err) => console.log(err))

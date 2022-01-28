@@ -1,0 +1,110 @@
+{
+  "users": [
+    {
+      "username": "Mike",
+      "bio": "",
+      "email": "",
+      "location": "",
+      "discussions": [],
+      "scoops": [],
+      "id": "0001"
+    },
+    {
+      "username": "Jane",
+      "bio": "",
+      "email": "",
+      "location": "",
+      "discussions": [],
+      "scoops": [],
+      "id": "0002"
+    }
+  ],
+  "feeds": [
+    {
+      "discussion": {
+        "word": "chess",
+        "timestamp": 1640706755628,
+        "id": "12345"
+      },
+      "timestamp": 1640706755628,
+      "id": "98765",
+      "latestScoop": {
+        "text": "Persian sha, arabic scac, french echec, english chess. This was the process.",
+        "id": "29dhs5"
+      }
+    },
+    {
+      "discussion": {
+        "word": "parabolic",
+        "timestamp": 1640936674264,
+        "id": "9XqrM68"
+      },
+      "timestamp": 1640936674308,
+      "id": "EM5crcT"
+    },
+    {
+      "discussion": {
+        "word": "Television",
+        "timestamp": 1640708239708,
+        "id": "2TJKpif"
+      },
+      "timestamp": 1640708239708,
+      "id": "QWloet-",
+      "latestScoop": {
+        "text": "tele is greek and vision latin",
+        "id": "2987367"
+      }
+    }
+  ],
+  "discussions": [
+    {
+      "word": "chess",
+      "userId": "0002",
+      "timestamp": 1640636744215,
+      "scoops": [
+        "54321"
+      ],
+      "definitions": [
+        "A game of two players, one board formed of 64 squares, with 16 pieces for each player. THe goal is to kill the adversary's king"
+      ],
+      "id": "12345"
+    },
+    {
+      "word": "Magazine",
+      "userId": "0001",
+      "timestamp": 1640636744215,
+      "definitions": [
+        "A weekly or monthly periodical",
+        "a room or building where the military keeps arms, explosions or provisions",
+        "a receptacle on a gun for holding cartridges"
+      ],
+      "questions": [
+        "Was the word Magazine originated in France or Italy?",
+        "What was the meaning of the root word for Magazine?"
+      ],
+      "id": "2TJKpif"
+    },
+    {
+      "word": "parabolic",
+      "userId": "0002",
+      "timestamp": 1640936674264,
+      "id": "9XqrM68"
+    }
+  ],
+  "scoops": [
+    {
+      "text": "chess from arabic",
+      "discussionId": "12345",
+      "userId": "0001",
+      "timestamp": 1640691491661,
+      "id": "54321"
+    },
+    {
+      "text": "greek tele for distance, vision latin for vision, watching",
+      "discussionId": "2TJKpif",
+      "userId": "0002",
+      "timestamp": 1640691523650,
+      "id": "2314"
+    }
+  ]
+}
