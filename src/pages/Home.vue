@@ -20,9 +20,21 @@ export default {
       return this.$store.state.feeds.items
     }
   },
+  beforeCreate() {
+    console.log('beforeCreate from Home')
+  },
   async created () {
     await this.$store.dispatch('feeds/fetchFeeds')
     this.$emit('ready')
+  },
+  beforeMount() {
+    console.log('beforeMount from Home')
+  },
+  mounted() {
+    console.log('mounted from Home')
+  },
+  unmounted() {
+    console.log('unmounted from Home')
   }
 }
 </script>
