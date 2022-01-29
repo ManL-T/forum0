@@ -61,20 +61,23 @@ span {
 .logo {
   float: left;
   /* padding: 0.5em; */
-  padding-top:0.7em;
+  padding-top:1em;
   padding-left:0.9em;
+  margin-top:1em;
 }
 
 .user-access {
   float: right;
   /* padding: 0.5em; */
-  padding-top:0.7em;
+  padding-top:1em;
+  margin-top:1em;
 }
 
 .dropdown {
   float: right;
   /* padding: 0.5em; */
-  padding-top:0.7em;
+  padding-top:1em;
+  margin-top:1em;
 }
 
 .dropdown:hover .dropdown-content {
