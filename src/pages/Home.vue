@@ -1,16 +1,8 @@
 <template>
   <div class="home">
-    <header>
-      <div class="add-button"><router-link :to="{name: 'DiscussionNew'}">
-        <h1>+</h1> 
-      </router-link></div>
-      <div class="search-box">
-      </div>
-    </header>
-    <br>
     <div v-if="feeds" class="feeds">
       <div class="discussions" v-for="feed in feeds.sort((a, b) => b.timestamp - a.timestamp)" :key="feed.id">
-        <feed-card :feed="feed"/>
+        <feed-card :feed="feed" class="feed"/>
       </div>
     </div>
   </div>
@@ -45,24 +37,10 @@ export default {
 </script>
 
 <style scoped>
-.header {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 0.5fr 5.5fr;
-}
 
-h1 {
-   /* background-color: aquamarine; */
-   color: #13bbe0;
-   padding: 0.3em;
-   margin-left: 0.2em;
-   margin-top: 0.3em;
-   border-radius: 10px;
-}
-
-.search-box {
-  border: green solid;
-  padding: 1em;
+.home {
+  margin: none;
+  padding: none;
 }
 
 .feeds {

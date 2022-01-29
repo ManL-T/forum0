@@ -3,12 +3,16 @@
     <br>
     <p>Username: {{ user.username}}</p>
     <p>Bio: {{ user.bio }}</p>
-    <div class="stats">
+    <!-- <div class="stats">
       <p> Stats: <span>{{ user.discussions.length }} discussion/s</span>
       <span>{{ user.scoopsCount }} scoop/s</span></p>
-    </div>
+    </div> -->
     <p>Email: {{ user.email }}</p>
     <p>Location: {{ user.location }}</p>
+    <!-- <h6>Your suggested words (discussions):</h6>
+    <div v-for="discussion in user.discussions" :key="discussion.id" class="user-discussions">
+     <p>{{ discussion.word }}</p> 
+    </div> -->
     <!-- <p>Languages: {{ user.languages }}</p> language is an array so needs a v-for-->
     <router-link
       :to="{name: 'ProfileEdit'}"
@@ -28,6 +32,7 @@ export default {
   },
   computed: {
     discussions () {
+      console.log('user discussions in user profile card: ', this.user.discussions.items)
       return this.user.discussions.items
     }, 
     scoops () {
@@ -40,12 +45,7 @@ export default {
 
 <style scoped>
 
-.profile-card {
-  background-color: inherit;
-  text-align: left;
-  margin: auto;
-  margin-left: 8em;
-}
+
 
 p {
   font-size: 0.5em;

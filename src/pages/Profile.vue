@@ -40,6 +40,20 @@ export default {
   color: rgb(51, 41, 41);
   font-size: 2em;
   height: 100vh;
+  text-align: left;
+  margin: none;
+  margin-left: 2em;
+  padding: none;
+}
+
+h5 {
+  margin: none;
+  padding: none;
+}
+
+profile-card {
+  margin: none;
+  padding: none;
 }
   
 

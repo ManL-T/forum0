@@ -1,16 +1,17 @@
 <template>
   <div class="dicussion-card">
         <div class="discussion-header">
-            <h5 v-if="discussion.userId === authUser?.id">
+            <div class="edit" v-if="discussion.userId === authUser?.id">
                 <router-link
                 :to="{name: 'DiscussionEdit', params: {id: this.discussion.id}}"
                 class="btn-green btn-small"
                 tag="button"
                 >
-                Edit Discussion
+                <p>Edit Discussion</p>
                 </router-link>
-            </h5>
-            <h1>{{ discussion.word }}</h1> 
+            </div>
+            <br>
+            <!-- <h1>{{ discussion.word }}</h1>  -->
             <div v-if="discussion.definition" class="definitions-list">
                 <p>Definition/s:</p>
                 <p>{{ discussion.definition }}</p>
@@ -43,3 +44,14 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.edit {
+    float: right;
+    color: white;
+    font-size: 0.8em;
+    border:tomato;
+    margin: none;
+    padding: none;
+}
+</style>
