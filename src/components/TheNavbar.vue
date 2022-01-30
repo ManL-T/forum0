@@ -51,6 +51,9 @@ span {
 }
 
 .navbar {
+  /* display: flex; */
+  align-items: center;
+  /* justify-content: center; */
   width: 100%;
   height:60px;
   background-color: #13bbe0;
@@ -60,24 +63,20 @@ span {
 
 .logo {
   float: left;
-  /* padding: 0.5em; */
-  padding-top:1em;
+  top:50%;
+  padding: 0.5em;
   padding-left:0.9em;
-  margin-top:1em;
 }
 
 .user-access {
   float: right;
-  /* padding: 0.5em; */
-  padding-top:1em;
-  margin-top:1em;
+  padding: 0.5em;
 }
 
 .dropdown {
   float: right;
-  /* padding: 0.5em; */
-  padding-top:1em;
-  margin-top:1em;
+  top: 50%;
+  padding: 0.5em;
 }
 
 .dropdown:hover .dropdown-content {
