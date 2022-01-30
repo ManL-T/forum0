@@ -1,6 +1,6 @@
 <template>
   <div v-if="scoop" class="scoop-edit">
-      <h1>Editing the scoop "{{ scoop.text }}"</h1>
+      <h1>Editing your scoop</h1>
     <ScoopEditor :text="scoop.text" @save="save" @cancel="cancel"/>
   </div>
 </template>
@@ -30,6 +30,12 @@ export default {
     },
     scoop () {
       return findById(this.scoops, this.id)
+    },
+    discussionId () {
+      return this.scoop.discussionId
+    },
+    discussion () {
+      return findById(this.$store.state.discussions.items, this.discussionId)
     }
   },
   methods: {

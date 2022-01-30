@@ -10,14 +10,14 @@
         <span class="sign-in"><router-link :to="{name:'Register'}">Sign up</router-link></span>
       </div>
       <div v-if="authUser" class="dropdown">
-          <span>{{authUser.username}}</span>
-          <div class="dropdown-content">
-            <br>
-            <router-link class="profile" :to="{name:'Profile'}">Profile</router-link>
-            <br><br>
-            <router-link class="add-discussion" :to="{name:'DiscussionNew'}">Add a discussion</router-link>
-            <br><br>
-            <router-link class="sign-out" :to="{name:'Home'}"><a @click="$store.dispatch('auth/signOut')">Sign out</a></router-link>
+        <span>{{authUser.username}}</span>
+        <div class="dropdown-content">
+          <br>
+          <router-link class="profile" :to="{name:'Profile'}">Profile</router-link>
+          <br><br>
+          <router-link class="add-discussion" :to="{name:'DiscussionNew'}">Add a discussion</router-link>
+          <br><br>
+          <router-link class="sign-out" :to="{name:'Home'}"><a @click="$store.dispatch('auth/signOut')">Sign out</a></router-link>
         </div>
       </div>
     </nav>
@@ -43,7 +43,7 @@ export default {
 <style scoped>
 
 a {
-  color: white;
+  color: #f4d00a;
 }
 
 span {
@@ -51,13 +51,11 @@ span {
 }
 
 .navbar {
-  /* display: flex; */
   align-items: center;
-  /* justify-content: center; */
   width: 100%;
-  height:60px;
-  background-color: #13bbe0;
-  color: white;
+  height:40px;
+  background-color: #010c0f;
+  color: #f4d00a;
   font-weight: bold;
 }
 
@@ -87,7 +85,7 @@ span {
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #13bbe0;
+  background-color: #010c0f;
   box-shadow: 0px 8px 16px 0px rgba(71, 60, 60, 0.2);
   padding: 0.5em;
   text-align: left;

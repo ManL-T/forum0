@@ -41,6 +41,8 @@ export default {
 .home {
   margin: none;
   padding: none;
+  padding-right: 15%;
+  padding-left: 15%;
 }
 
 .feeds {

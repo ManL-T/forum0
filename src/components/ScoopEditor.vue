@@ -1,6 +1,7 @@
 <template>
   <div class="scoop-editor">
     <form @submit.prevent="save">
+        <!-- <AppFormField as="textarea" name="text" v-model="form.text" rows="10" cols="30" rules="required" /> -->
         <label for="scoop-text">Scoop's text:</label><br>
         <textarea type="text" v-model="form.text"/><br>
         <button @click.prevent="$emit('cancel')" class="cancel">Cancel</button>
@@ -28,3 +29,10 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+textarea {
+    white-space: pre-line;
+    white-space: pre-wrap;
+}
+</style>
