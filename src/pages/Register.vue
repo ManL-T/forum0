@@ -38,7 +38,6 @@ export default {
 </script>
 
 <style scoped>
-
 .register {
     padding: 2em;
     font-size: 1.5em;

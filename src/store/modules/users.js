@@ -34,6 +34,7 @@ export default {
             email = email.toLowerCase()
             const user = { name, username, usernameLower, email }
             const userRef = await firebase.firestore().collection('users').doc(id)
+            // this is not working??? gets create on authentication but not on firestore, why?
             userRef.set(user)
             const newUser = await userRef.get()
             commit('setItem', { resource: 'users', item: newUser}, { root: true })

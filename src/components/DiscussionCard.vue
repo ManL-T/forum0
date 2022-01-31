@@ -1,25 +1,24 @@
 <template>
-  <div class="dicussion-card">
-        <div class="discussion-header">
-            <router-link
-                v-if="discussion.userId === authUser?.id"
-                :to="{name: 'DiscussionEdit', params: {id: this.discussion.id}}"
-                class="edit">
-                <p>Edit</p>
-            </router-link>
-            <div v-if="discussion.definition" class="definitions-list">
-                <p>Definition/s:</p>
-                <p>{{ discussion.definition }}</p>
-            </div>
-            <div v-if="discussion.question" class="questions-list">
-                <p>Question:</p>
-                <p>{{ discussion.question }}</p>
-            </div>
-            <div class="author">
-                <h5>Added by: {{ author }}</h5>
-            </div>
-
-        </div>
+  <div class="discussion-card">
+    <router-link
+        v-if="discussion.userId === authUser?.id"
+        :to="{name: 'DiscussionEdit', params: {id: this.discussion.id}}"
+        class="edit">
+        <p>Edit</p>
+    </router-link>
+    <div v-if="discussion.definition" class="definitions-list">
+        <p>Definition/s:</p>
+        <p>{{ discussion.definition }}</p>
+    </div>
+    <div v-if="discussion.question" class="questions-list">
+        <p>Question:</p>
+        <p>{{ discussion.question }}</p>
+    </div>
+    <div v-if="discussionAuthor" class="author">
+        <h5>Added by: {{ discussionAuthor.username }}</h5>
+    </div>
+    <br>
+    <br>
   </div>
 </template>
 
@@ -38,20 +37,20 @@ export default {
         }
     },
     computed: {
-        ...mapGetters( 'auth', [ 'authUser' ]),
-        author () {
-            return this.discussionAuthor.username
-        }
+        ...mapGetters( 'auth', [ 'authUser' ])
     }
 }
 </script>
 
 <style scoped>
-.discussion-header {
+.discussion-card {
     margin: none;
     padding: 0.5em;
-    padding-left:1em;
-    padding-right:1em;
+    padding-left: 1em;
+}
+
+p {
+    font-size: 1em;
 }
 
 .edit {
@@ -61,4 +60,12 @@ export default {
     margin: none;
     padding: none;
 }
+
+.author {
+    float: right;
+    margin: none;
+    padding: none;
+}
+
+
 </style>

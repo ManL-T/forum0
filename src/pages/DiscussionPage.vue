@@ -1,9 +1,9 @@
 <template>
   <div class="discussion-page">
     <header>
-      <div class="word-title">
-        {{ discussion.word }}
-      </div>
+      <!-- <div class="word-title"> -->
+        <h1>{{ discussion.word }}</h1>
+      <!-- </div> -->
     </header>
 
     <div class="container">
@@ -102,31 +102,47 @@ export default {
   padding-left: 15%;
 }
 
+header {
+  margin: none;
+  padding: none;
+  border: none;
+}
+
 .word-title {
-   left: 0;
-   font-size:3em;
-   color: #58f0cd;
-   margin: none;
-   padding: 0.2em;
-   padding-left: 0.5em;
+  margin: none;
+  padding: none;
+  border: none;
  }
+
+h1 {
+  font-size:1.5em;
+  color: #58f0cd;
+  margin: none;
+  padding: none;
+  border: none;
+  padding-left: 0.5em;
+}
 
 .container {
   width: 100%;
+  margin: none;
+  padding: none;
+  border: none;
 }
 
 .discussion {
-  background-color: #b6ebf6;
+  background-color: #7dbfcc;
   color: #042820;
   margin: none;
-  padding: none;
-  border-radius: 1em;
+  padding: 0.5em;
+  border-radius: 8px 8px 0px 0px;
 }
 
 .scoops-list {
-  background-color: rgb(123, 226, 240);
-  margin: 0.2em;
-  padding: 1em;
-  border-radius: 1em;
+  background-color: #DEF9F9;
+  margin: none;
+  margin-top: 5px;
+  padding: 25px;
+  /* border-radius: 1em; */
 }
 </style>

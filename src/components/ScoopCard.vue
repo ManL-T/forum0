@@ -1,13 +1,16 @@
 <template>
 <div class="scoop-card">
     <p>{{ scoop.text }}</p>
-    <h5>Added by:{{ author?.username }}</h5>
     <h5 v-if="scoop.userId === authUser?.id">
         <router-link
         :to="{name: 'ScoopEdit', params: {id: this.scoop.id}}">
         Edit Scoop
         </router-link>
     </h5>
+    <div class="author">
+        <h5>Added by: {{ author?.username }}</h5>
+    </div>
+    <br><br>
 </div>
   
 </template>
@@ -31,3 +34,15 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+p {
+    white-space: pre-wrap;
+}
+
+.author {
+    float: right;
+    margin: none;
+    padding: none;
+}
+</style>
