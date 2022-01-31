@@ -1,17 +1,12 @@
 <template>
   <div class="dicussion-card">
         <div class="discussion-header">
-            <div class="edit" v-if="discussion.userId === authUser?.id">
-                <router-link
+            <router-link
+                v-if="discussion.userId === authUser?.id"
                 :to="{name: 'DiscussionEdit', params: {id: this.discussion.id}}"
-                class="btn-green btn-small"
-                tag="button"
-                >
-                <p>Edit Discussion</p>
-                </router-link>
-            </div>
-            <br>
-            <!-- <h1>{{ discussion.word }}</h1>  -->
+                class="edit">
+                <p>Edit</p>
+            </router-link>
             <div v-if="discussion.definition" class="definitions-list">
                 <p>Definition/s:</p>
                 <p>{{ discussion.definition }}</p>
@@ -21,10 +16,9 @@
                 <p>{{ discussion.question }}</p>
             </div>
             <div class="author">
-                <h5>{{ discussion.author?.username }}</h5>
-                <!-- pending using the discussion getter to get the author
-                and I guess pass the discussion id instead of the whole discussion as a prop? -->
+                <h5>Added by: {{ author }}</h5>
             </div>
+
         </div>
   </div>
 </template>
@@ -37,20 +31,33 @@ export default {
         discussion : {
             required: true,
             type: Object
+        },
+        discussionAuthor : {
+            required: true,
+            type: Object
         }
     },
     computed: {
-        ...mapGetters( 'auth', [ 'authUser' ] ),
+        ...mapGetters( 'auth', [ 'authUser' ]),
+        author () {
+            return this.discussionAuthor.username
+        }
     }
 }
 </script>
 
 <style scoped>
+.discussion-header {
+    margin: none;
+    padding: 0.5em;
+    padding-left:1em;
+    padding-right:1em;
+}
+
 .edit {
     float: right;
-    color: white;
+    color: rgb(27, 79, 224);
     font-size: 0.8em;
-    border:tomato;
     margin: none;
     padding: none;
 }

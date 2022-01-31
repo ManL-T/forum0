@@ -33,7 +33,7 @@ export default {
             const usernameLower = username.toLowerCase()
             email = email.toLowerCase()
             const user = { name, username, usernameLower, email }
-            const userRef = firebase.firestore().collection('users').doc(id)
+            const userRef = await firebase.firestore().collection('users').doc(id)
             userRef.set(user)
             const newUser = await userRef.get()
             commit('setItem', { resource: 'users', item: newUser}, { root: true })

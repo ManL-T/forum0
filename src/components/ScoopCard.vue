@@ -1,16 +1,12 @@
 <template>
 <div class="scoop-card">
-    {{ scoop.text }}
-    <br><br>
-    {{ user?.username }}
+    <p>{{ scoop.text }}</p>
+    <h5>Added by:{{ author?.username }}</h5>
     <h5 v-if="scoop.userId === authUser?.id">
         <router-link
-        :to="{name: 'ScoopEdit', params: {id: this.scoop.id}}"
-        class="btn-green btn-small"
-        tag="button"
-        >
+        :to="{name: 'ScoopEdit', params: {id: this.scoop.id}}">
         Edit Scoop
-    </router-link>
+        </router-link>
     </h5>
 </div>
   
@@ -29,7 +25,7 @@ export default {
     },
     computed: {
         ...mapGetters( 'auth', [ 'authUser' ] ),
-        user () {
+        author () {
             return findById(this.$store.state.users.items, this.scoop.userId)
         }
     }

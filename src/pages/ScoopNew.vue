@@ -3,7 +3,7 @@
     <h1>Add a new scoop for {{ discussion.word }}</h1>
       <form @submit.prevent="addScoop">
         <label for="scoop-text">Add text for this scoop</label><br>
-        <textarea type="text" v-model="text"/><br>
+        <textarea name="scoop-text" type="text" v-model="text" rows="20" cols="60"/><br>
         <button>Add your scoop</button>
       </form>
   </div>
@@ -32,7 +32,7 @@ export default {
     addScoop () {
       const newScoop = {
         text: this.text,
-        discussionId: this  .id
+        discussionId: this.id
       }
       this.$store.dispatch('scoops/createScoop', newScoop)
       this.text = ""

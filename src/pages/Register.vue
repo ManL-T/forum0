@@ -9,7 +9,7 @@
             <div class="form-actions">
                 <button type="submit" class="submit">Register</button>
             </div>
-      </VeeForm>
+        </VeeForm>
     </div>
 </template>
 

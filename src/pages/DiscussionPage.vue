@@ -8,12 +8,12 @@
 
     <div class="container">
       <div v-if="discussion" class= "discussion">
-        <DiscussionCard :discussion="discussion"/>
+        <DiscussionCard :discussion="discussion" :discussionAuthor="discussionAuthor"/>
       </div>
       <div v-else class="no-discussions">Error, this discussion does not exist anymore</div>
       <div v-if="pertinentScoops" class="the-scoops">
         <div v-for="scoop in pertinentScoops" :key="scoop.id" class="scoops-list">
-          <ScoopCard :scoop="scoop"/>
+          <ScoopCard :scoop="scoop" :scoopsAuthors="scoopsAuthors"/>
         </div>
       </div>
       <div v-if="pertinentScoops.length == 0" class="no-scoops">
@@ -81,6 +81,12 @@ export default {
     },
     pertinentScoops () {
       return this.allScoops.filter(scoop => scoop.discussionId === this.id)
+    },
+    discussionAuthor () {
+      return findById(this.$store.state.users.items, this.discussion.userId)
+    },
+    scoopsAuthors () {
+      return this.$store.state.users.items
     }
   }
   // methods: {
@@ -105,35 +111,15 @@ export default {
    padding-left: 0.5em;
  }
 
-.svg-icon {
-  width: 1.5em;
-  height: 1.5em;
-  padding: none;
-  margin: none;
-  margin-left: 0.2em;
-  margin-top: 0.3em;
-}
-
-.svg-icon path,
-.svg-icon polygon,
-.svg-icon rect {
-  fill: #13bbe0;
-}
-
-.svg-icon circle {
-  stroke: #13bbe0;
-  stroke-width: 1;
-}
-
 .container {
   width: 100%;
 }
 
 .discussion {
-  background-color: rgb(20, 115, 128);
-  color: white;
-  margin: 0.2em;
-  padding: 1em;
+  background-color: #b6ebf6;
+  color: #042820;
+  margin: none;
+  padding: none;
   border-radius: 1em;
 }
 
