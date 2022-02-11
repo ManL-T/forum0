@@ -46,7 +46,9 @@ export default {
             batch.set(feedRef, {
                 discussion : {
                     word,
-                    id: discRef.id
+                    question,
+                    id: discRef.id,
+                    userId:discussion.userId
                 },
                 timestamp: Date.now()
             })

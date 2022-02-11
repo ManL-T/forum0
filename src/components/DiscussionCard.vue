@@ -3,22 +3,23 @@
     <router-link
         v-if="discussion.userId === authUser?.id"
         :to="{name: 'DiscussionEdit', params: {id: this.discussion.id}}"
-        class="edit">
-        <p>Edit</p>
+         class="edit-button">
+        <h6 class="edit">Edit</h6>
     </router-link>
+    <br>
     <div v-if="discussion.definition" class="definitions-list">
-        <p>Definition/s:</p>
+        <h5>Definition:</h5>
         <p>{{ discussion.definition }}</p>
     </div>
+    <br>
     <div v-if="discussion.question" class="questions-list">
-        <p>Question:</p>
+        <h5>Question:</h5>
         <p>{{ discussion.question }}</p>
     </div>
+    <br>
     <div v-if="discussionAuthor" class="author">
         <h5>Added by: {{ discussionAuthor.username }}</h5>
     </div>
-    <br>
-    <br>
   </div>
 </template>
 
@@ -43,26 +44,46 @@ export default {
 </script>
 
 <style scoped>
-.discussion-card {
-    margin: none;
-    padding: 0.5em;
-    padding-left: 1em;
+
+h5 {
+    font-weight: bold;
+    padding: 0;
+    margin: 0;
 }
 
 p {
     font-size: 1em;
+    line-height: 1.5em;
+    padding: 0;
+    margin: 0;
+}
+
+.discussion-card {
+    margin: 0;
+    padding: 0;
+}
+
+.edit-button {
+    display:inline;
+    float: right;
+    margin: 0;
+    padding: 0;
 }
 
 .edit {
-    float: right;
-    color: rgb(27, 79, 224);
+    display:inline;
+    align-content: right;
+    margin: 0;
+    background-color: #2c98ad;
+    color: #d8eaee;
     font-size: 0.8em;
-    margin: none;
-    padding: none;
+    width: 5%;
+    padding: 1em;
+    border-radius: 5px;
 }
 
 .author {
-    float: right;
+    float: left;
     margin: none;
     padding: none;
 }

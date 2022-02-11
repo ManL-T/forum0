@@ -59,7 +59,8 @@ export default {
                 },
                 latestScoop: { 
                     id: scoopRef.id,
-                    text: scoop.text
+                    text: scoop.text,
+                    userId: scoop.userId
                 },
                 timestamp: Date.now()
             })

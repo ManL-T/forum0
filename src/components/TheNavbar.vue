@@ -2,7 +2,7 @@
   <header class="header" id="header">
     <nav class="navbar">
       <router-link :to="{name: 'Home'}" class="logo">
-        Home
+        <img ref="src/assets/LOGO.png">2ingo
       </router-link>
       <div v-if="!authUser" class="user-access">
         <span class="log-in"><router-link :to="{name:'SignIn'}">Log in</router-link></span>

@@ -1,18 +1,21 @@
 <template>
   <div class="sign-in">
-      <VeeForm @submit="signIn" class="card card-form">
-        <h1 class="text-center">Login</h1>
+      <VeeForm @submit="signIn" class="card-form">
+        <h1 class="title">Sign In</h1>
 
-        <AppFormField label="Email" name="email" type="email" v-model="form.email" rules="required|email" />
-        <AppFormField label="Password" name="password" type="password" v-model="form.password" rules="required" />
+        <AppFormField label="email" name="email" type="email" v-model="form.email" rules="required|email" />
+        <AppFormField label="password" name="password" type="password" v-model="form.password" rules="required" />
 
-        <div class="push-top">
-          <button type="submit" class="btn-blue btn-block">Log in</button>
-        </div>
-
-        <div class="form-actions text-right">
-          <router-link :to="{name: 'Register'}">Create an account?</router-link>
-        </div>
+        <span>
+            <h5>I don't have an account - 
+          <router-link :to="{name: 'Register'}">Sign Up</router-link>
+          </h5>
+        </span>
+        
+        <button type="submit" class="login">Log in</button>
+        <button type="cancel" class="cancel">
+            <router-link :to="{name: 'Home'}" class="cancel-link">
+                Cancel </router-link></button>
       </VeeForm>
   </div>
 </template>
@@ -48,25 +51,72 @@ export default {
 <style scoped>
 
 .sign-in {
+    width: 100%;
+    height: 100vh;
+}
+
+.card-form {
+    width: 70%;
+    margin: auto;
+    margin-top: 5%;
     padding: 2em;
-    font-size: 1.5em;
-    align-content: left; /* doing nothing */
+    background-color: #DEF9F9;
+    border-radius: 20px;
+    align-content: center;
 }
 
-.form-group {
+.title {
+    font-size: 2em;
+    color: #064637;
+    font-weight: lighter;
+    text-align: center;
+    margin: 0;
     padding: 0.5em;
+    padding-top: 0.2em;
 }
 
-label {
-    padding: 10px;
+span {
+    color: #064637;
+    text-align: center;
 }
 
-input {
-    font-size: 1em;
+h5 {
+    font-weight: lighter;
 }
 
-button {
-    font-size: 0.5em;
+a {
+    text-decoration: none;
+    color: #064637;
+    font-weight: bold;
+}
+
+.login {
+  font-size: 1em;
+  color: #fcfeff;
+  width: 65%;
+  border: none;
+  background-color: #0c6953;
+  border-radius: 10px;
+  padding: 1em;
+  margin-bottom: 10px;
+  margin-left: 20%;
+  font-weight: bold;
+}
+
+.cancel {
+  font-size: 1em;
+  color: #fcfeff;
+  width: 65%;
+  border: none;
+  background-color: #8d7a0e;
+  border-radius: 10px;
+  padding: 1em;
+  margin-left: 20%;
+  font-weight: bold;
+}
+
+.cancel-link {
+    color: #fcfeff;
 }
 
 </style>

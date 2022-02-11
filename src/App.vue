@@ -16,7 +16,7 @@ export default {
   components: { TheNavbar, AppSpinner },
   data () {
     return {
-      showPage: false
+      showPage: true
     }
   },
   methods: {
@@ -38,11 +38,23 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #001a20;
-  margin: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  /* border:rgb(18, 224, 145) solid; */
 }
 
 body {
-  margin: 0em;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+    /* border:rgb(224, 18, 224) solid; */
+}
+
+.container {
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }
 
 li {

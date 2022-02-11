@@ -1,6 +1,7 @@
 <template>
   <div class="form-group">
     <label :for="name">{{label}}</label>
+    <br>
     <VeeField
       :name="name"
       :label="label"
@@ -10,6 +11,7 @@
       class="form-input"
       v-bind="$attrs"
     />
+    <br>
     <VeeErrorMessage :name="name" class="form-error" />
   </div>
 </template>
@@ -26,8 +28,26 @@ export default {
 
 <style>
 
+.form-group {
+  margin-left: 20%;
+  padding: auto;
+  align-content: center;
+  align-items: center;
+}
+
+label {
+  font-size: 1em;
+  color: #064637;
+  margin-top: 0.5em;
+}
+
 .form-input {
-    font-size: 1em;
+  font-size: 2em;
+  width: 80%;
+  border: none;
+  border-radius: 5px;
+  background-color: #9bc2ca;
+  color: #031e27;
 }
 
 

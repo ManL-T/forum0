@@ -1,7 +1,7 @@
 <template>
   <div class="discussion-edit">
-    <div v-if="discussion" class="scoop-edit">
-      <h1>Editing the discussion "{{ discussion.word }}"</h1>
+    <div v-if="discussion" class="editing">
+      <h5>Editing the discussion "{{ discussion.word }}"</h5>
       <DiscussionEditor :word="discussion.word"  :definition="discussion.definition" :question="discussion.question" 
           @save="save" @cancel="cancel"/>
       </div>
@@ -49,3 +49,21 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+
+.editing {
+  width: 100%;
+  height: 100vh;
+}
+
+h5 {
+  font-size: 1em;
+  color:aquamarine;
+  margin: 0;
+  padding: 0;
+  margin-left: 30%;
+  margin-top: 2%;
+}
+  
+</style>

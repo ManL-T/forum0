@@ -1,15 +1,20 @@
 <template>
   <div class="new-discussion">
     <form @submit.prevent="saveDiscussion">
-      <br>
-      <label for="word">Add a new word:</label><br>
-      <input type="text" v-model="word">
-      <br><br>
-      <label for="definition">Add any pertinent definitions:</label><br>
-      <textarea type="text" v-model="definition"/><br>
-      <label for="question">Add a pertinent question:</label><br>
-      <input type="text" v-model="question"><br>
-      <button>Add Word</button>
+        <div class="form-group">
+        <label for="word">Add a new word</label><br>
+        <input type="text" v-model="word">
+        <br><br>
+        <label for="definition">Add any pertinent definitions</label><br>
+        <textarea type="text" v-model="definition"/><br>
+        <label for="question">Add a pertinent question</label><br>
+        <input type="text" v-model="question">
+      </div>
+   <br><br>
+      <button class="add-word">Add Word</button>
+      <button type="cancel" class="cancel">
+            <router-link :to="{name: 'Home'}" class="cancel-link">
+                Cancel </router-link></button>
     </form>
   </div>
 </template>
@@ -43,6 +48,81 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
+.new-discussion {
+  width: 100%;
+  height: 100vh;
+}
+
+form {
+    width: 70%;
+    margin: auto;
+    margin-top: 5%;
+    padding: 2em;
+    background-color: #DEF9F9;
+    border-radius: 20px;
+    align-content: center;
+}
+
+.form-group {
+  margin-left: 20%;
+  padding: auto;
+  align-content: center;
+  align-items: center;
+}
+
+label {
+  font-size: 1em;
+  color: #064637;
+  margin-top: 0.5em;
+}
+
+input {
+  font-size: 2em;
+  width: 80%;
+  border: none;
+  border-radius: 5px;
+  background-color: #9bc2ca;
+  color: #031e27;
+}
+
+textarea {
+    font-size: 2em;
+  width: 80%;
+  border: none;
+  border-radius: 5px;
+  background-color: #9bc2ca;
+  color: #031e27;
+}
+
+.add-word {
+  font-size: 1em;
+  color: #fcfeff;
+  width: 65%;
+  border: none;
+  background-color: #0c6953;
+  border-radius: 10px;
+  padding: 1em;
+  margin-bottom: 10px;
+  margin-left: 20%;
+  font-weight: bold;
+}
+
+.cancel {
+  font-size: 1em;
+  color: #fcfeff;
+  width: 65%;
+  border: none;
+  background-color: #8d7a0e;
+  border-radius: 10px;
+  padding: 1em;
+  margin-left: 20%;
+  font-weight: bold;
+}
+
+.cancel-link {
+    color: #fcfeff;
+}
 
 </style>
