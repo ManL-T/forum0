@@ -2,18 +2,15 @@
   <div v-if="activeUser" class="profile-card">
     <form @submit.prevent="save">
       <div class="form-group">
-        <p>
-        <label for="user_name">Username:</label>
+        <label for="user_name">Username:</label><br>
         <input
           v-model="activeUser.username"
           type="text"
           placeholder="Username"
           class="username"
-        /></p>
-      </div>
-
-      <div class="form-group">
-        <label for="user_bio">Bio:</label>
+        />
+        <br>
+        <label for="user_bio">Bio:</label><br>
         <textarea
           v-model="activeUser.bio"
           class="form-input"
@@ -21,10 +18,7 @@
           id="user_bio"
           placeholder="Write a few words about yourself."
         ></textarea>
-      </div>
-
-      <div class="form-group">
-        <p>
+        <br>
         <label class="form-label" for="user_location">Location:</label>
         <input
           v-model="activeUser.location"
@@ -32,12 +26,12 @@
           class="form-input"
           id="user_location"
         />
-        </p>
       </div>
+      <br>
 
       <div class="actions">
+        <button type="submit" class="save">Save</button>
         <button class="cancel" @click="cancel">Cancel</button>
-        <button type="submit" class="submit">Save</button>
       </div>
     </form>
   </div>
@@ -71,49 +65,76 @@ export default {
 <style scoped>
 
 .profile-card {
-  background-color: inherit;
-  text-align: left;
-  margin: auto;
-  margin-left: 8em;
-  font-size: 0.5em;
-  height: 100%;
+  width: 100%;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+form {
+    width: 70%;
+    margin: auto;
+    margin-top: 2%;
+    padding: 2em;
+    background-color: #DEF9F9;
+    border-radius: 20px;
+    align-content: center;
 }
 
-p {
-  padding: 2px;
+.form-group {
+  margin-left: 20%;
+  padding: auto;
+  align-content: center;
+  align-items: center;
+}
+
+label {
+  font-size: 1em;
+  color: #064637;
+  margin-top: 0.5em;
 }
 
 input {
-  padding: 10px;
-  margin: 10px;
+  font-size: 1em;
+  width: 80%;
+  border: none;
+  border-radius: 5px;
+  background-color: #9bc2ca;
+  color: #031e27;
 }
 
 textarea {
-  width: 50%;
-  margin-left: 20px;
-  resize: none;
-  vertical-align: top;
-}
-
-.submit {
-  padding: 0.5em 2em 0.5em 2em;
-  background-color:#3b9c0a;
-  color: #ffffff;
-  font-size: 1.5em;
-  margin: 50px; 
-  margin-top: 100px;
+  font-size: 1em;
+  width: 80%;
   border: none;
   border-radius: 5px;
+  background-color: #9bc2ca;
+  color: #031e27;
+}
+
+.save {
+  font-size: 1em;
+  color: #fcfeff;
+  width: 65%;
+  border: none;
+  background-color: #0c6953;
+  border-radius: 10px;
+  padding: 1em;
+  margin-bottom: 10px;
+  margin-left: 20%;
+  font-weight: bold;
 }
 
 .cancel {
-  padding: 0.5em 2em 0.5em 2em;
-  background-color:#b30f0f;
-  color: #ffffff;
-  font-size: 1.5em;
-  margin: 10px; 
+  font-size: 1em;
+  color: #fcfeff;
+  width: 65%;
   border: none;
-  border-radius: 5px;
+  background-color: #8d7a0e;
+  border-radius: 10px;
+  padding: 1em;
+  margin-left: 20%;
+  font-weight: bold;
 }
+
 
 </style>

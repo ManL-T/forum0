@@ -11,7 +11,7 @@
         <input type="text" v-model="question">
       </div>
    <br><br>
-      <button class="add-word">Add Word</button>
+      <button type="submit" class="add-word">Add Word</button>
       <button type="cancel" class="cancel">
             <router-link :to="{name: 'Home'}" class="cancel-link">
                 Cancel </router-link></button>
@@ -88,7 +88,7 @@ input {
 }
 
 textarea {
-    font-size: 2em;
+  font-size: 2em;
   width: 80%;
   border: none;
   border-radius: 5px;

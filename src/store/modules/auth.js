@@ -49,7 +49,7 @@ export default {
             await dispatch('users/createUser', { id: result.user.uid, email, name, username })
             console.log('dispatching fetchAuthUser')
             await dispatch('fetchAuthUser')
-            // await dispatch('signOut')
+            await dispatch('signOut')
         },
         async signInWithEmailAndPassword (context, { email, password }) {
             return firebase.auth().signInWithEmailAndPassword(email, password)

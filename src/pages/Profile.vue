@@ -1,6 +1,5 @@
 <template>
 <div class="profile-page">
-  <h5>Profile page</h5>
     <div class="profile-card">
       <ProfileCard v-if="!edit" :user="user" />
       <ProfileCardEditor v-else :user="user" />
@@ -36,7 +35,7 @@ export default {
 
 <style scoped>
 
-.profile-page {
+/* .profile-page {
   color: rgb(51, 41, 41);
   font-size: 2em;
   height: 100vh;
@@ -44,7 +43,21 @@ export default {
   margin: none;
   margin-left: 2em;
   padding: none;
+} */
+
+.profile-page {
+    width: 100%;
+    height: 100vh;
 }
+
+/* .profile-card {
+  background-color: #7dbfcc;
+  color: #122631;
+  margin: 0;
+  margin-left: 30%;
+  width: 50%;
+  border-radius: 8px 8px 0px 0px;
+} */
 
 h5 {
   margin: none;

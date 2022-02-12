@@ -44,7 +44,7 @@ p {
 .search {
   background-color: #071113;
   color: #58f0cd;
-  border:rgb(135, 209, 222) solid 1px;
+  border:rgb(74, 105, 110) solid 1px;
   border-radius: 2px;
   padding: 5px;
   margin: 5px;

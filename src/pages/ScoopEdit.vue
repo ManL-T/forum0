@@ -1,7 +1,7 @@
 <template>
-  <div v-if="scoop" class="scoop-edit">
-      <h1>Editing your scoop</h1>
-    <ScoopEditor :text="scoop.text" @save="save" @cancel="cancel"/>
+  <div v-if="scoop" class="editing">
+      <h5>Editing your scoop</h5>
+    <ScoopEditor :text="scoop.text" :sources="scoop.sources" @save="save" @cancel="cancel"/>
   </div>
 </template>
 
@@ -39,10 +39,11 @@ export default {
     }
   },
   methods: {
-    async save ({ text }) {
+    async save ({ text, sources }) {
       await this.$store.dispatch('scoops/updateScoop', {
         id: this.id,
-        text
+        text,
+        sources
       })
       this.$router.push({ name: 'DiscussionPage', params: { id: this.scoop.discussionId } })
     },
@@ -53,6 +54,20 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
+.editing {
+  width: 100%;
+  height: 100vh;
+}
+
+h5 {
+  font-size: 1em;
+  color:aquamarine;
+  margin: 0;
+  padding: 0;
+  margin-left: 30%;
+  margin-top: 2%;
+}
 
 </style>

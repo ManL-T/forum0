@@ -22,10 +22,11 @@ export default {
     actions: {
         fetchScoops: ({ dispatch }, { ids }) => dispatch('fetchItems', { resource: 'scoops', ids }, { root: true }),
         fetchScoop: ({ dispatch }, { id }) => dispatch('fetchItem', { resource: 'scoops', id }, { root: true }),
-        async createScoop ({ commit, state, rootState }, {discussionId, text}) {
+        async createScoop ({ commit, state, rootState }, {discussionId, text, sources}) {
             let scoop = {
                 discussionId,
                 text,
+                sources,
                 timestamp: Date.now(),
                 userId: rootState.auth.authId
             }
@@ -70,9 +71,9 @@ export default {
             commit('setItem', { resource: 'scoops', item: scoopRef }, { root: true } )
             commit('users/appendScoopToUser', { userId, scoopId: scoopRef.id }, { root: true })
         },
-        async updateScoop ({commit, state}, { id, text } ) {
+        async updateScoop ({commit, state}, { id, text, sources } ) {
             const scoop = findById(state.items, id)
-            const newScoop = { ...scoop, text }
+            const newScoop = { ...scoop, text, sources }
             const scoopRef = firebase.firestore().collection('scoops').doc(id)
             const batch = firebase.firestore().batch()
             batch.update(scoopRef, newScoop)

@@ -29,10 +29,10 @@ export default {
     actions: {
         fetchUsers: ({ dispatch }, { ids }) => dispatch('fetchItems', { resource: 'users', ids }, { root: true }),
         fetchUser: ({ dispatch }, { id }) => dispatch('fetchItem', { resource: 'users', id }, { root: true }),
-        async createUser ({commit}, {id, name, username, email}) {
+        async createUser ({commit}, {id, name, username, email, location}) {
             const usernameLower = username.toLowerCase()
             email = email.toLowerCase()
-            const user = { name, username, usernameLower, email }
+            const user = { name, username, usernameLower, email, location}
             const userRef = await firebase.firestore().collection('users').doc(id)
             // this is not working??? gets create on authentication but not on firestore, why?
             userRef.set(user)

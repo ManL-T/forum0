@@ -116,8 +116,8 @@ textarea {
   font-weight: bold;
 }
 
-.cancel-link {
+/* .cancel-link {
     color: #fcfeff;
-}
+} */
 
 </style>

@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { findById } from '@/helpers'
 import store from '@/store'
 import Home from '@/pages/Home.vue'
+import About from '@/pages/About.vue'
 import NotFound from '@/pages/NotFound'
 import DiscussionPage from '@/pages/DiscussionPage.vue'
 import DiscussionNew from '@/pages/DiscussionNew.vue'
@@ -67,6 +68,11 @@ const routes = [
     name: 'ScoopEdit',
     component: ScoopEdit,
     props: true
+  },
+  {
+    path: '/about',
+    name: 'About',
+    component: About
   },
   {
     path: '/register',

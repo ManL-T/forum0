@@ -51,7 +51,7 @@ hr {
 .language-filter {
   background-color: #071113;
   color: #58f0cd;
-  border:rgb(135, 209, 222) solid 1px;
+  /* border:rgb(135, 209, 222) solid 1px; */
   border-radius: 2px;
   margin: 5px;
   padding: 0.5em;

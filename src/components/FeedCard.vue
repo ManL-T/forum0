@@ -1,19 +1,19 @@
 <template>
-   <li v-if="feed" class="feed">
+   <div v-if="feed" class="feed">
         <router-link :to="{name: 'DiscussionPage', params: {id: feed.discussion.id}}">
        <header>
         <h2>{{ feed.discussion.word}}</h2> 
        </header>
         <div v-if="feed.latestScoop" class="has-scoop">
-            <h3>{{ feed.latestScoop.text}}</h3> 
+            <p>{{ feed.latestScoop.text}}</p> 
             <!-- <h4 v-if="scoopAuthor">By: {{ scoopAuthor.username }}</h4> -->
         </div>
         <div v-else class="no-scoops">
             <!-- <h3 v-if="discussionAuthor">By: {{ discussionAuthor.username }}</h3>  -->
-            <h3 v-if="feed">{{ feed.discussion.question }}</h3>
+            <p v-if="feed">{{ feed.discussion.question }}</p>
         </div>
         </router-link>
-    </li>
+    </div>
 </template>
 
 <script>
@@ -39,14 +39,20 @@ export default {
 
 <style scoped>
 
+
+p {
+    color: #042820;
+    font-size: 1em;
+    margin-left: 40px;
+    margin-right: 30px;
+}
+
 h2 {
-  /* margin: 0.5em; */
-  /* padding: 1.5em;
-  background-color: #05323b; */
   color: #58f0cd;
   font-size: 2em;
   border-radius: 1em 0 0 0 ;
   padding: 0;
+  margin: 0;
 }
 
 header {
@@ -54,13 +60,10 @@ header {
     margin: 50%;
     /* padding: auto; */
     align-content: center;
+    align-items: center;
+    text-align: center;
 }
 
-h3 {
-    color: #042820;
-    font-size: 1em;
-    margin-left: 20px;
-}
 
 /* .feed {
   background-color: rgb(123, 226, 240);
@@ -113,6 +116,7 @@ header {
   margin: 0px 5px 10px 5px;
   border-radius: 0em 0 1em 1em ;
   border:#050405 solid 1px;
+  text-align: center;
 
 }
 

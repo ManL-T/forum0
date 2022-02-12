@@ -9,6 +9,10 @@
     </h5>
     <br>
     <p>{{ scoop.text }}</p>
+    <br>
+    <span v-if="scoop.sources">
+        <p class="sources"> <b>Source:</b> <i>{{ scoop.sources }}</i></p>
+    </span>
     <div class="author">
         <h5>Added by: {{ author?.username }}</h5>
     </div>
@@ -46,6 +50,7 @@ p {
     padding: 0;
     margin: 0;
 }
+
 
 .scoop-card {
     margin: 0;

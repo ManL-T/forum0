@@ -4,6 +4,7 @@
       <MenuLeft />
     </div>
     <div v-if="feeds" class="feeds">
+      <h4>Feeds: last published</h4>
       <div class="discussions" v-for="feed in feeds.sort((a, b) => b.timestamp - a.timestamp)" :key="feed.id">
         <feed-card class="feed" :feed="feed"/>
       </div>
@@ -62,10 +63,11 @@ export default {
 <style scoped>
 
 h4 {
-  margin: 0em;
+  margin: 0.5em;
   padding: 0em;
+  padding-left: 10px;
   background-color: #1E4147;
-  /* border:burlywood solid; */
+  color: #58f0cd;
   font-size: 1em;
 }
 
