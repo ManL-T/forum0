@@ -127,7 +127,7 @@ h5 {
 
 .discussion-page {
   display: grid;
-  grid-template-columns: 0.5fr 5fr 0.5fr;
+  grid-template-columns: 1fr 4fr 1fr;
   width: 100%;
 }
 

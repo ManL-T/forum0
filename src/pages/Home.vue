@@ -92,13 +92,7 @@ h4 {
 }
 
 
-.feeds {
-  margin: 0;
-  border: 0;
-  padding: 0;
-}
-
-.discussions {
+.feeds, .discussions {
   margin: 0;
   border: 0;
   padding: 0;
