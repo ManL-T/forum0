@@ -10,7 +10,7 @@
       <p>The more we join, the more fun, so please spread the word to other word freaks :-)))</p>
       <br>
       <br>
-      <p style="font-size:1em">For any technical issues, feature suggestions, or other, please email us here: <i> info @ 2ingo.com </i></p>
+      <p style="font-size:1em">For any technical issues, feature suggestions, or other, please email us here: <i style="color:blue"> info @ 2ingo.com </i></p>
     </div>
   </div>
 </template>
@@ -31,7 +31,7 @@ export default {
     margin: 0;
     padding: 0;
     padding-top: 20px;
-    background-color: #a2afaf;
+    background-color: #c3cfcf;
     color: #022b21;
     align-content: center;
 }

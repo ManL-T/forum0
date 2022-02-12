@@ -1,6 +1,9 @@
 <template>
   <div class="left-menu">
     <div class="language-filter">English</div>
+    <div class="about">
+      <router-link class="about-link" :to="{name:'About'}">About 2ingo</router-link>
+    </div>
     <div class="categories-words">
       <h2>Words</h2>
       <div class="category">All</div>
@@ -56,6 +59,20 @@ hr {
   margin: 5px;
   padding: 0.5em;
   align-content: center;
+}
+
+.about {
+  color: #58f0cd;
+  margin: auto;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
+.about-link {
+  color: #58f0cd;
+  margin: auto;
+  padding-left: 10px;
+  padding-top: 10px;
 }
 
 .separation-line {
