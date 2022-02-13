@@ -14,8 +14,8 @@
           <span>{{authUser.username}}</span>
           <div class="dropdown-content">
             <br>
-            <router-link class="about" :to="{name:'About'}">About</router-link>
-            <br><br>
+            <!-- <router-link class="about" :to="{name:'About'}">About</router-link>
+            <br><br> -->
             <router-link class="profile" :to="{name:'Profile'}">Profile</router-link>
             <br><br>
             <router-link class="add-discussion" :to="{name:'DiscussionNew'}">Add a Word</router-link>

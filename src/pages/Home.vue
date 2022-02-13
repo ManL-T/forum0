@@ -1,11 +1,14 @@
 <template>
   <div class="home">
     <div class="menu-left">
-      <MenuLeft />
+      <MenuLeft :currentCategory="currentCategory" @filterFeeds="currentCategory = $event"/>
     </div>
     <div v-if="feeds" class="feeds">
-      <h4>Feeds / English / Words / All</h4>
-      <div class="discussions" v-for="feed in feeds.sort((a, b) => b.timestamp - a.timestamp)" :key="feed.id">
+      <h4>Feeds / English / Words / {{ currentCategory }}</h4>
+      <div v-if="filteredFeeds.length === 0" class="empty-category">
+          <h4>No discussions for this category</h4>
+        </div>
+      <div class="discussions" v-for="feed in filteredFeeds.sort((a, b) => b.timestamp - a.timestamp)" :key="feed.id">
         <feed-card class="feed" :feed="feed"/>
       </div>
     </div>
@@ -22,9 +25,33 @@ import MenuRight from '@/components/MenuRight'
 
 export default {
   components: { FeedCard, MenuLeft, MenuRight },
+  data() {
+    return {
+      currentCategory: "all"
+    }
+  },
   computed: {
     feeds () {
       return this.$store.state.feeds.items
+    },
+    filteredFeeds() {
+      if (this.currentCategory === 'all') {
+        return this.feeds
+      }
+      if (this.currentCategory === 'generic') {
+        return this.feeds.filter(feed => feed.discussion.category === 'generic')
+      }
+      if (this.currentCategory === 'academic') {
+        return this.feeds.filter(feed => feed.discussion.category === 'academic')
+      }
+      if (this.currentCategory === 'location') {
+        return this.feeds.filter(feed => feed.discussion.category === 'location')
+      }
+      if (this.currentCategory === 'person') {
+        return this.feeds.filter(feed => feed.discussion.category === 'person')
+      } else {
+        return this.feeds
+      }
     }
   },
   async created() {
@@ -61,6 +88,8 @@ export default {
 </script>
 
 <style scoped>
+
+
 
 h4 {
   margin: 0.5em;

@@ -22,7 +22,7 @@ export default {
     },
     actions: {
         fetchDiscussion: ({ dispatch }, { id }) => dispatch('fetchItem', { resource: 'discussions', id }, { root: true }),
-        async createDiscussion ({ commit, state, rootState }, {word, definition, question} ) {
+        async createDiscussion ({ commit, state, rootState }, {word, definition, question, category, type, language} ) {
             console.log('received dicussion to send to firestore: word, definition, question...', word, definition, question)
             console.log('state from createDiscussion: ', state)
             const discussion = {
@@ -30,7 +30,10 @@ export default {
                 timestamp: Date.now(),
                 word,
                 definition,
-                question
+                question,
+                category,
+                type,
+                language
             }
             const batch = firebase.firestore().batch()
             const discRef = firebase.firestore().collection('discussions').doc()
@@ -48,7 +51,10 @@ export default {
                     word,
                     question,
                     id: discRef.id,
-                    userId:discussion.userId
+                    userId:discussion.userId,
+                    category,
+                    type,
+                    language
                 },
                 timestamp: Date.now()
             })

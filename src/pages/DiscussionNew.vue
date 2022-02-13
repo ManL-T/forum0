@@ -9,6 +9,15 @@
         <textarea type="text" v-model="definition"/><br>
         <label for="question">Add a pertinent question</label><br>
         <input type="text" v-model="question">
+        <br><br>
+        <label for="category">Category:</label>
+        <br>
+         <select v-model="category" placeholder="select one please"> 
+        <option value="person">Person' name</option>
+        <option value="location">Location/place name</option>
+        <option value="academic">Academic, technical name</option>
+        <option value="generic">Generic (does not specifically apply to any of the above)</option>
+      </select>
       </div>
    <br><br>
       <button type="submit" class="add-word">Add Word</button>
@@ -25,7 +34,8 @@ export default {
     return {
       word: "",
       definition: "",
-      question: ""
+      question: "",
+      category: '' 
     }
   },
   created () {
@@ -36,12 +46,16 @@ export default {
       const discussion = {
         word: this.word,
         definition: this.definition,
-        question: this.question
+        question: this.question,
+        category: this.category,
+        type: "word",
+        language: "english"
       }
-      this.$store.dispatch('discussions/createDiscussion', { word: discussion.word, definition: discussion.definition, question: discussion.question} )
+      this.$store.dispatch('discussions/createDiscussion', { word: discussion.word, definition: discussion.definition, question: discussion.question, category: discussion.category, type: discussion.type, language: discussion.language} )
       this.word = ""
       this.definition = ""
       this.question = ""
+      this.category = ""
       this.$router.push('/')
     }
   }

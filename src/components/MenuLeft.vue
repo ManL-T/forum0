@@ -6,15 +6,30 @@
     </div>
     <div class="categories-words">
       <h2>Words</h2>
-      <div class="category">All</div>
+      <div @click="updateCategory('all')"
+      class="category"
+      :class="{ active: currentCategory === 'all'}"
+      >All</div>
       <hr class="separation-line">
-      <div class="category">Generic</div>
+      <div @click="updateCategory('generic')"
+      class="category"
+      :class="{ active: currentCategory === 'generic'}"
+      >Generic</div>
       <hr class="separation-line">
-      <div class="category">Academic</div>
+      <div @click="updateCategory('academic')"
+      class="category"
+      :class="{ active: currentCategory === 'academic'}"
+      >Academic</div>
       <hr class="separation-line">
-      <div class="category">Locations</div>
+      <div @click="updateCategory('location')"
+      class="category"
+      :class="{ active: currentCategory === 'location'}"
+      >Location</div>
       <hr class="separation-line">
-      <div class="category">Persons</div>
+      <div @click="updateCategory('person')"
+      class="category"
+      :class="{ active: currentCategory === 'person'}"
+      >Person</div>
     </div>
     <div class="categories-expressions">
       <h2>Expressions</h2>
@@ -32,11 +47,21 @@
 
 <script>
 export default {
-
+  props: [ 'currentCategory'],
+  methods: {
+    updateCategory(by) {
+      this.$emit('filterFeeds', by)
+    }
+  }
 }
 </script>
 
 <style scoped>
+
+.active {
+  background-color:#58f0cd;
+  color:#071113;
+}
 
 h2 {
   margin: 0.5;
