@@ -19,13 +19,13 @@ export default {
   },
   async created () {
     // fetch the discussion
-    const scoop = await this.$store.dispatch('scoops/fetchScoop', { id: this.id })
+    await this.$store.dispatch('scoops/fetchScoop', { id: this.id })
     this.$emit('ready')
-    console.log('scoop as fetched in ScoopEdit: ', scoop)
+    // console.log('scoop as fetched in ScoopEdit: ', scoop)
   },
   computed: {
     scoops () {
-      console.log('the scoops: ', this.$store.state.scoops.items)
+      // console.log('the scoops: ', this.$store.state.scoops.items)
       return this.$store.state.scoops.items
     },
     scoop () {

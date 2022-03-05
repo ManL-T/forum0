@@ -5,6 +5,7 @@ export default {
     namespaced: true,
     state: {
         items: [],
+        currentCategory: ""
     },
     getters: {},
     actions: {
@@ -17,12 +18,19 @@ export default {
                     return item
                 })
                 resolve(feeds)
-                console.log('Action >> fetchFeeds: ', feeds)
+                // console.log('Action >> fetchFeeds: ', feeds)
             })   
             commit('appendUnsubscribe', {unsubscribe}, { root: true })
         }),
+        updateCategory ({commit}, {category}) {
+            commit('setCategory', category)
+        }
     },
     mutations: {
+        setCategory (state, category) {
+            state.currentCategory = category
+            // console.log('category inside mutation', category)
+        }
     // we don't need these anymore since we fetch data when we navigate, hence delete????
     // appendDiscussionToFeeds (state, newFeed ) {
     //     state.items.push(newFeed)

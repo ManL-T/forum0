@@ -8,9 +8,9 @@ export default {
         authObserverUnsubscribe: null
     },
     getters: {
-        authUser: (state, rootState, getters, rootGetters) => {
-            console.log('rootState: ', rootState)
-            console.log('getters: ', getters)
+        authUser: (state, _rootState, _getters, rootGetters) => {
+            // console.log('rootState: ', rootState)
+            // console.log('getters: ', getters)
             return rootGetters['user'](state.authId)
         }
     },
@@ -31,7 +31,7 @@ export default {
                 commit('setAuthObserverUnsubscribe', unsubscribe)
             })
         },
-        fetchAuthUser: async ({ dispatch, state, commit }) => {
+        fetchAuthUser: async ({ dispatch, commit }) => {
             const userId = firebase.auth().currentUser?.uid
             if(!userId) return
             await dispatch('fetchItem', { 
@@ -42,12 +42,12 @@ export default {
                 }},
                 { root: true })
             commit('setAuthId', userId)
-            console.log('using state to get authId: ', state.authId)
+            // console.log('using state to get authId: ', state.authId)
         },
         async registerUserWithEmailAndPassword ({dispatch}, { email, name, username, password }) {
             const result = await firebase.auth().createUserWithEmailAndPassword(email, password)
             await dispatch('users/createUser', { id: result.user.uid, email, name, username })
-            console.log('dispatching fetchAuthUser')
+            // console.log('dispatching fetchAuthUser')
             await dispatch('fetchAuthUser')
             await dispatch('signOut')
         },
@@ -66,10 +66,10 @@ export default {
         }
     },
     mutations: {
-        setAuthId (state, id) {
-            console.log('setting mutation authId to logged in user with id: ', id)
+        setAuthId (state,id) {
+            // console.log('setting mutation authId to logged in user with id: ', id)
             state.authId = id
-            console.log('authId: ',state.authId)
+            // console.log('authId: ',state.authId)
         },
         setAuthUserUnsubscribe (state, unsubscribe) {
             state.authUserUnsubscribe = unsubscribe

@@ -4,7 +4,7 @@
         <div class="form-group">
             <label for="scoop-text">Scoop's text:</label><br>
             <textarea name="scoop-text" class="scoop-text" type="text" v-model="form.text" rows="10"/><br>
-            <label for="scoop-source">Scoop's source/s:</label>
+            <label for="scoop-source">Scoop's source/s:</label><br>
             <textarea name="scoop-source" class="scoop-source" type="text" v-model="form.sources" rows="5"/>
         </div>
     <br>

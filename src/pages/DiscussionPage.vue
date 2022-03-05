@@ -1,7 +1,6 @@
 <template>
   <div class="discussion-page">
-    <MenuLeft/>
-    <div class="container">
+    <div class="main">
       <header class="title">
         <h1>{{ discussion.word }}</h1>
       </header>
@@ -28,19 +27,16 @@
         </router-link>
       </button>
     </div>
-    <MenuRight/>
 </div>
 </template>
 
 <script>
 import DiscussionCard from '@/components/DiscussionCard'
 import ScoopCard from '@/components/ScoopCard'
-import MenuLeft from '@/components/MenuLeft'
-import MenuRight from '@/components/MenuRight'
 import { findById } from '@/helpers'
 // import { mapActions } from 'vuex'
 export default {
-  components: { DiscussionCard, ScoopCard, MenuLeft, MenuRight },
+  components: { DiscussionCard, ScoopCard },
   props: {
     id : {
       required: true,
@@ -54,7 +50,6 @@ export default {
     // fetch the discussion
     const discussion = await this.$store.dispatch('discussions/fetchDiscussion', { id: this.id })
     console.log('discussion as fetched in DiscussionPage: ', discussion)
-    this.$emit('ready')
     // fetch scoops
     const scoops = await this.$store.dispatch('scoops/fetchScoops', { ids: discussion.scoops })
     // PENDING -- this raises exception when discussion has no scoops
@@ -68,6 +63,7 @@ export default {
     // const discussionUserId = discussion.usersIds
     // usersIds.push(discussionUserId) UNNECESSARY SINCE WE DO GET DISCUSSION AUTHOR ABOVE
     this.$store.dispatch('fetchUsers', { ids: usersIds })
+    this.$emit('ready')
   },
   computed: {
     discussions () {
@@ -91,6 +87,12 @@ export default {
     },
     scoopsAuthors () {
       return this.$store.state.users.items
+    },
+    filteredWords () {
+      // let wordsByAlphabet = []
+      let currentFirstLetter = this.discussion.substr(1,0).toLowerCase()
+      console.log('currentFirstLetter: ', currentFirstLetter)
+      return this.discussions.filter(discussion => discussion.word.toLowerCase() === currentFirstLetter)
     }
   }
   // methods: {
@@ -126,12 +128,10 @@ h5 {
 }
 
 .discussion-page {
-  display: grid;
-  grid-template-columns: 1fr 4fr 1fr;
   width: 100%;
 }
 
-.container {
+.main {
   width: 97%;
   margin: 5px;
   padding: 15px;

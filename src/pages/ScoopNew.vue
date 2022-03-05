@@ -13,8 +13,8 @@
         <br>
         <button type="submit" class="add-scoop">Add Scoop</button>
         <button type="cancel" class="cancel">
-            <router-link :to="{name: 'Home'}" class="cancel-link">
-                Cancel </router-link></button>
+           <router-link :to="{ name: 'DiscussionPage', params: { id: this.id }}" class="cancel-link">
+             Cancel</router-link></button>
       </form>
   </div>
 </template>
@@ -48,7 +48,10 @@ export default {
       }
       this.$store.dispatch('scoops/createScoop', newScoop)
       this.text = ""
-      this.$router.push('/')
+      this.$router.push({ name: 'DiscussionPage', params: { id: this.id }})
+    },
+    cancel () {
+      this.$router.push({ name: 'DiscussionPage', params: { id: this.id }})
     }
   },
   computed: {
@@ -56,7 +59,7 @@ export default {
       return this.$store.state.discussions.items
     },
     discussion () {
-      console.log('the discussions from scoopNew page: ',this.discussions)
+      // console.log('the discussions from scoopNew page: ',this.discussions)
       return findById(this.discussions, this.id)
     }
   }

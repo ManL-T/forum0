@@ -1,8 +1,5 @@
 <template>
   <div class="home">
-    <div class="menu-left">
-      <MenuLeft :currentCategory="currentCategory" @filterFeeds="currentCategory = $event"/>
-    </div>
     <div v-if="feeds" class="feeds">
       <h4>Feeds / English / Words / {{ currentCategory }}</h4>
       <div v-if="filteredFeeds.length === 0" class="empty-category">
@@ -12,25 +9,19 @@
         <feed-card class="feed" :feed="feed"/>
       </div>
     </div>
-    <div class="menu-right">
-     <MenuRight/>
-    </div>
   </div>
 </template>
 
 <script>
 import FeedCard from '@/components/FeedCard'
-import MenuLeft from '@/components/MenuLeft'
-import MenuRight from '@/components/MenuRight'
 
 export default {
-  components: { FeedCard, MenuLeft, MenuRight },
-  data() {
-    return {
-      currentCategory: "all"
-    }
-  },
+  components: { FeedCard },
   computed: {
+    currentCategory () {
+      console.log('currentCategory from Home: ', this.$store.state.feeds.currentCategory)
+      return this.$store.state.feeds.currentCategory
+    },
     feeds () {
       return this.$store.state.feeds.items
     },
@@ -52,10 +43,18 @@ export default {
       } else {
         return this.feeds
       }
+    },
+    filteredWords () {
+      let wordsByCategory = []
+      this.filteredFeeds.forEach(feed => {
+        wordsByCategory.push(feed.discussion.word)
+      })
+      console.log('array of words by category: ', wordsByCategory)
+      return wordsByCategory
     }
   },
   async created() {
-    console.log('created on Home')
+    // console.log('created on Home')
     // fetch feeds
     const feeds = await this.$store.dispatch('feeds/fetchFeeds')
     console.log('feeds from homepage: ', feeds)
@@ -66,23 +65,20 @@ export default {
         scoopersIds.push(feed.latestScoop.userId)
       } 
     })
-    console.log('scoopersIds, ', scoopersIds)
+    // console.log('scoopersIds, ', scoopersIds)
     let questionsIds = await feeds.map(feed => feed.discussion.userId)
-    console.log('questionsIds from homepage: ', questionsIds)
+    // console.log('questionsIds from homepage: ', questionsIds)
     let allUsersIds = scoopersIds.concat(questionsIds)
-    console.log('allUsersIds from homepage: ', allUsersIds)
+    // console.log('allUsersIds from homepage: ', allUsersIds)
     const users = await this.$store.dispatch('fetchUsers', { ids: allUsersIds })
     console.log('all users 1wayOrOther involved in feeds: ', users)
+    await this.$store.dispatch('discussions/fetchWords')
+    // this.fetchAuthUser()
+    console.log('AuthUser from Home page after fetching: ', this.$store.state.auth.authId)
+    this.$router.beforeEach(() => {
+      this.showPage = false
+    })
     this.$emit('ready')
-  },
-  beforeMount() {
-    console.log('beforeMount from Home')
-  },
-  mounted() {
-    console.log('mounted from Home')
-  },
-  unmounted() {
-    console.log('unmounted from Home')
   }
 }
 </script>
@@ -101,12 +97,9 @@ h4 {
 }
 
 .home {
-  margin: 0;
-  padding: 0;
+  margin: 2px;
+  padding: 2px;
   width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 4fr 1fr;
-  /* border:rgb(222, 135, 142) solid; */
 }
 
 .menu-left {

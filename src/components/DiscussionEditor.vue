@@ -9,6 +9,15 @@
       <textarea type="text" v-model="form.definition"/><br>
       <label for="questions">A pertinent question:</label><br>
       <textarea type="text" v-model="form.question"/>
+        <br><br>
+        <label for="category">Category:</label>
+        <br>
+      <select v-model="form.category" placeholder="select one please" class="category"> 
+        <option value="person">Person' name</option>
+        <option value="location">Location/place name</option>
+        <option value="academic">Academic, technical name</option>
+        <option value="generic">Generic (does not specifically apply to any of the above)</option>
+      </select>
     </div>
   <br>
   <button class="save" type="submit">Save</button>
@@ -22,14 +31,16 @@ export default {
   props: {
     word: { type: String, default: '' },
     definition: { type: String, default: '' },
-    question: { type: String, default: '' }
+    question: { type: String, default: '' },
+    category: { type: String, default: '' }
     },
   data () {
     return {
       form: {
         word: this.word,
         definition: this.definition,
-        question: this.question
+        question: this.question,
+        category: this.category
       }
     }
   },
@@ -89,6 +100,11 @@ textarea {
   border-radius: 5px;
   background-color: #9bc2ca;
   color: #031e27;
+}
+
+.category {
+  font-size: 1em;
+  width: 80%;
 }
 
 .save {

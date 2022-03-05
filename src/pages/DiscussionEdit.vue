@@ -2,7 +2,7 @@
   <div class="discussion-edit">
     <div v-if="discussion" class="editing">
       <h5>Editing the discussion "{{ discussion.word }}"</h5>
-      <DiscussionEditor :word="discussion.word"  :definition="discussion.definition" :question="discussion.question" 
+      <DiscussionEditor :word="discussion.word"  :definition="discussion.definition" :question="discussion.question" :category="discussion.category" 
           @save="save" @cancel="cancel"/>
       </div>
   </div>
@@ -34,12 +34,13 @@ export default {
     }
   },
   methods: {
-    async save ({ word, definition, question }) {
+    async save ({ word, definition, question, category }) {
       await this.$store.dispatch('discussions/updateDiscussion', {
         id: this.id,
         word,
         definition,
-        question
+        question,
+        category
       })
       this.$router.push({ name: 'DiscussionPage', params: { id: this.id } })
     },

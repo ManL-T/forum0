@@ -34,7 +34,7 @@ export default {
         async signIn () {
             try {
                 await this.$store.dispatch('auth/signInWithEmailAndPassword', { ...this.form })
-                console.log('from signIn method after dispatching the action. This is the form submitted: ', this.form)
+                // console.log('from signIn method after dispatching the action. This is the form submitted: ', this.form)
                 this.$router.push('/')
             } catch (error) {
                 alert(error.message)

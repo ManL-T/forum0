@@ -22,7 +22,7 @@ export default {
     actions: {
         fetchScoops: ({ dispatch }, { ids }) => dispatch('fetchItems', { resource: 'scoops', ids }, { root: true }),
         fetchScoop: ({ dispatch }, { id }) => dispatch('fetchItem', { resource: 'scoops', id }, { root: true }),
-        async createScoop ({ commit, state, rootState }, {discussionId, text, sources}) {
+        async createScoop ({ commit, rootState }, {discussionId, text, sources}) {
             let scoop = {
                 discussionId,
                 text,
@@ -30,10 +30,10 @@ export default {
                 timestamp: Date.now(),
                 userId: rootState.auth.authId
             }
-            console.log('the new scoop: ', scoop)
-            console.log('the state when creating scoop: ', state)
+            // console.log('the new scoop: ', scoop)
+            // console.log('the state when creating scoop: ', state)
             let scoopDiscussion = findById(rootState.discussions.items, discussionId)
-            console.log('the scoops discussion: ', scoopDiscussion)
+            // console.log('the scoops discussion: ', scoopDiscussion)
     
             const scoopRef = firebase.firestore().collection('scoops').doc()
             const discRef = firebase.firestore().collection('discussions').doc(scoopDiscussion.id)
@@ -55,6 +55,7 @@ export default {
             batch.set(feedRef, {
                 discussion : {
                     word: scoopDiscussion.word,
+                    category: scoopDiscussion.category,
                     id: scoopDiscussion.id,
                     timestamp: scoopDiscussion.timestamp
                 },

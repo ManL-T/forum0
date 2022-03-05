@@ -1,7 +1,6 @@
 <template>
   <header class="header" id="header">
     <nav class="navbar">
-      <div class="container">
         <router-link :to="{name: 'Home'}" class="logo">
         <img ref="src/assets/LOGO.png">2ingo
          </router-link>
@@ -14,8 +13,6 @@
           <span>{{authUser.username}}</span>
           <div class="dropdown-content">
             <br>
-            <!-- <router-link class="about" :to="{name:'About'}">About</router-link>
-            <br><br> -->
             <router-link class="profile" :to="{name:'Profile'}">Profile</router-link>
             <br><br>
             <router-link class="add-discussion" :to="{name:'DiscussionNew'}">Add a Word</router-link>
@@ -23,7 +20,6 @@
             <router-link class="sign-out" :to="{name:'Home'}"><a @click="$store.dispatch('auth/signOut')">Sign out</a></router-link>
           </div>
         </div>
-      </div>
     </nav>
   </header>
 </template>
@@ -34,12 +30,6 @@ import { mapGetters } from 'vuex'
 export default {
   computed: {
     ...mapGetters('auth', ['authUser'])
-  },
-  mounted() {
-    console.log('mounted on navbar. authUser: ', this.authUser)
-  },
-  unmounted() {
-    console.log('unmounted on navbar. authUser: ', this.authUser)
   }
 }
 </script>

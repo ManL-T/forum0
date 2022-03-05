@@ -5,11 +5,16 @@ export default {
     namespaced: true,
     state: {
         items: [],
+        words: [
+            // {
+            //     id:'HKquvNTcyhN0WXEFteyG',
+            //     word: 'Magazine'
+            // }
+        ]
     },
     getters: {
         discussion: (state, getters, rootState) => { // not sure if this is working
             return (id) => {
-                console.log(getters)
                 const discussion = findById(state.items, id)
                     return { 
                         ...discussion,
@@ -21,10 +26,20 @@ export default {
         },
     },
     actions: {
+        async fetchWords ({commit}) {
+            const snapshot = await firebase.firestore().collection('discussions').get()
+            const discussions = snapshot.docs.map(doc => doc.data())
+            const words = []
+            discussions.forEach(discussion => {
+                words.push({id:discussion.id,word:discussion.word})
+            })
+            // console.log('words from fetchwords action: ', words)
+            commit('setWords',words)
+        },
         fetchDiscussion: ({ dispatch }, { id }) => dispatch('fetchItem', { resource: 'discussions', id }, { root: true }),
-        async createDiscussion ({ commit, state, rootState }, {word, definition, question, category, type, language} ) {
-            console.log('received dicussion to send to firestore: word, definition, question...', word, definition, question)
-            console.log('state from createDiscussion: ', state)
+        async createDiscussion ({ commit, rootState }, {word, definition, question, category, type, language} ) {
+            // console.log('received dicussion to send to firestore: word, definition, question...', word, definition, question)
+            // console.log('state from createDiscussion: ', state)
             const discussion = {
                 userId: rootState.auth.authId,
                 timestamp: Date.now(),
@@ -41,6 +56,10 @@ export default {
             const userRef = firebase.firestore().collection('users').doc(rootState.auth.authId)
             // add new discussion to firestore users collection
             batch.set(discRef, discussion)
+            // update discussion to add its id
+            const discussionRef = firebase.firestore().collection('discussions').doc(discRef.id)
+            const finalDiscussion = {...discussion,id:discRef.id}
+            batch.update(discussionRef, finalDiscussion)
             // add new discussion to firestore users collection
             batch.update(userRef, {
                 discussions: firebase.firestore.FieldValue.arrayUnion(discRef.id)
@@ -58,8 +77,6 @@ export default {
                 },
                 timestamp: Date.now()
             })
-            console.log('new discussion', discRef)
-            console.log('newfeed: ', feedRef)
             await batch.commit()
     
             commit('setItem', { resource: 'discussions', item: discRef }, { root: true })
@@ -77,5 +94,10 @@ export default {
             return docToResource(newDiscussion)
         }    
     },
-    mutations: {}
+    mutations: {
+        setWords (state, words) {
+            state.words = words
+            console.log('words from mutation: ', words)
+        }
+    }
 }

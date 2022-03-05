@@ -1,6 +1,12 @@
 <template>
   <div class="left-menu">
-    <div class="language-filter">English</div>
+    <div class="language-filter">
+      <select v-model="language"> 
+        <option value="person">English</option>
+        <option value="location">French</option>
+        <option value="academic">Spanish</option>
+      </select>
+    </div>
     <div class="about">
       <router-link class="about-link" :to="{name:'About'}">About 2ingo</router-link>
     </div>
@@ -47,10 +53,13 @@
 
 <script>
 export default {
-  props: [ 'currentCategory'],
+  emits: ['categoryChange'],
   methods: {
-    updateCategory(by) {
-      this.$emit('filterFeeds', by)
+    updateCategory(category) {
+      this.$store.dispatch('feeds/updateCategory', {category})
+      console.log('category before emit in menu: ', category)
+      this.$emit('categoryChange', category)
+      this.$router.push('/')
     }
   }
 }

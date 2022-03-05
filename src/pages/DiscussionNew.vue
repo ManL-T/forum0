@@ -3,16 +3,16 @@
     <form @submit.prevent="saveDiscussion">
         <div class="form-group">
         <label for="word">Add a new word</label><br>
-        <input type="text" v-model="word">
+      <input type="text" v-model="word">
         <br><br>
         <label for="definition">Add any pertinent definitions</label><br>
-        <textarea type="text" v-model="definition"/><br>
+      <textarea type="text" v-model="definition"/><br>
         <label for="question">Add a pertinent question</label><br>
-        <input type="text" v-model="question">
+      <input type="text" v-model="question">
         <br><br>
         <label for="category">Category:</label>
         <br>
-         <select v-model="category" placeholder="select one please"> 
+      <select v-model="category" placeholder="select one please" class="category"> 
         <option value="person">Person' name</option>
         <option value="location">Location/place name</option>
         <option value="academic">Academic, technical name</option>
@@ -56,6 +56,9 @@ export default {
       this.definition = ""
       this.question = ""
       this.category = ""
+      this.$router.push('/')
+    },
+    cancel () {
       this.$router.push('/')
     }
   }
@@ -108,6 +111,11 @@ textarea {
   border-radius: 5px;
   background-color: #9bc2ca;
   color: #031e27;
+}
+
+.category {
+  font-size: 1em;
+  width: 50%;
 }
 
 .add-word {

@@ -8,9 +8,9 @@ export default {
     getters: {
         user: (state, getters, rootState) => {
             return (id) => {
-                console.log('getters in user: ', getters)
-                console.log('on user getter this is the id to get the user: ', id)
-                console.log('on user getter this is the resources to get the user: ', state.items)
+                // console.log('getters in user: ', getters)
+                // console.log('on user getter this is the id to get the user: ', id)
+                // console.log('on user getter this is the resources to get the user: ', state.items)
                 const user = findById(state.items, id)
                 if (!user) return null
                 return {
@@ -56,13 +56,13 @@ export default {
             const user = findById(state.items, userId)
             user.discussions = user.discussions || []  // create the array if does not already exist
             user.discussions.push(discussionId)
-            console.log('discussionId gets appended into this user: ', user )
+            // console.log('discussionId gets appended into this user: ', user )
         },
         appendScoopToUser ( state, { userId, scoopId }) {
             const user = findById(state.items, userId)
             user.scoops = user.scoops || [] // if array not exists, create it
             user.scoops.push(scoopId)
-            console.log('scoopId gets appended into this user: ', user )
+            // console.log('scoopId gets appended into this user: ', user )
         },
     }
 }
