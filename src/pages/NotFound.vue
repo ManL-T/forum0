@@ -14,7 +14,8 @@
 <script>
 export default {
   created () {
-    this.$emit('ready')  }
+    this.$emit('ready')  
+  }
 }
 </script>
 
