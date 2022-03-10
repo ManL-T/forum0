@@ -2,7 +2,7 @@
   <div v-if="blockedRoutes.includes($route.name) == false">
     <TheNavbar class="navbar"/>
     <div class="container">
-      <TheLeftMenu class="menu-left" @categoryChange="clickedCategory = category"/>
+      <TheLeftMenu class="menu-left" @updateCategory="setCategory"/>
       <router-view v-show="showPage" @ready="showPage = true" :key="$route.path"/>
       <AppSpinner v-show="!showPage"/>  
       <TheRightMenu class="menu-right" :allWords="allWords"/>
@@ -27,13 +27,24 @@ export default {
   data () {
     return {
       showPage: true,
-      clickedCategory: '',
       feedDiscussions: [],
       categoryWords: []
     }
   },
   methods: {
-    ...mapActions('auth', ['fetchAuthUser'])
+    ...mapActions('auth', ['fetchAuthUser']),
+    setCategory(category){
+      console.log('category in setCategory method: ', category)
+      let filteredWords = []
+      this.feedDiscussions.map(discussion => {
+        if(discussion.category === category) {
+          filteredWords.push({id: discussion.id, word: discussion.word})
+        }})
+        console.log('allWords:', this.allWords)
+        console.log('filtered words: ', filteredWords)
+      this.categoryWords = filteredWords
+      console.log('category words in setCategory: ', this.categoryWords)
+    }
   },
   async created () {
     await this.$store.dispatch('discussions/fetchWords')
@@ -62,19 +73,22 @@ export default {
       console.log('words from App.vue: ', this.$store.state.discussions.words )
       return this.$store.state.discussions.words
     },
+    filteredWords () {
+      return this.categoryWords
+    },
     // filteredDiscussions () {
     //   return this.feedDiscussions.filter(discussion => discussion.category === this.currentCategory)
     // },
-    filteredWords () {
-      console.log('cclikedCategory from computed: ', this.clickedCategory)
-      let filteredWords = []
-      this.feedDiscussions.map(discussion => {
-        if(discussion.category === this.clickedCategory) {
-          filteredWords.push(discussion.word)
-        }})
-        console.log('filtered words inside computed: ', filteredWords)
-      return filteredWords
-    },
+    // filterWords () {
+    //   console.log('cclikedCategory from computed: ', this.clickedCategory)
+    //   let filteredWords = []
+    //   this.feedDiscussions.map(discussion => {
+    //     if(discussion.category === this.clickedCategory) {
+    //       filteredWords.push(discussion.word)
+    //     }})
+    //     console.log('filtered words inside computed: ', filteredWords)
+    //   return filteredWords
+    // },
     blockedRoutes () {
       return ['Register', 'SignIn', 'About', 'DiscussionNew', 'ScoopNew', 'ScoopEdit', 'Profile', 'ProfileEdit' ]
     }

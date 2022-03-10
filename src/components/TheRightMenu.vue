@@ -60,7 +60,11 @@ export default {
     },
     filteredWords () {
       return this.selectedWords
-      }
+    },
+    // finalWords () {
+    //   let final = this.allWords.sort()
+    //   return final
+    // }
   },
   methods: {
     filterByLetter (letter) {

@@ -46,6 +46,8 @@
       <div class="category">Current</div>
       <hr class="separation-line">
       <div class="category">Slang</div>
+      <hr class="separation-line">
+      <div class="category">Political</div>
     </div>
         </div>
 
@@ -56,9 +58,9 @@ export default {
   emits: ['categoryChange'],
   methods: {
     updateCategory(category) {
+      this.$emit('updateCategory', category)
       this.$store.dispatch('feeds/updateCategory', {category})
       console.log('category before emit in menu: ', category)
-      this.$emit('categoryChange', category)
       this.$router.push('/')
     }
   }
